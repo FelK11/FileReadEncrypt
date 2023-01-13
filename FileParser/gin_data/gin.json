@@ -1,0 +1,182 @@
+[
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "London Dry Gin",
+    "size": "0,7 L",
+    "price": "18,50 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "London Dry Gin",
+    "size": "1 L",
+    "price": "26,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Gin No.10",
+    "size": "0,7 L",
+    "price": "27,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Gin No.10",
+    "size": "1 L",
+    "price": "41,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "0.0 Alkoholfrei",
+    "size": "0,7 L",
+    "price": "19,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Flor de Sevilla Gin",
+    "size": "1 L",
+    "price": "32,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Flor de Sevilla Gin",
+    "size": "0,7 L",
+    "price": "24,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Blackcurrant Royale Distilled Gin",
+    "size": "0,7 L",
+    "price": "22,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Lovage London Dry Gin",
+    "size": "1 L",
+    "price": "45,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Gin No.10 Citrus Heart Edition",
+    "size": "1 L",
+    "price": "44,80 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Gin Rangpur",
+    "size": "1 L",
+    "price": "26,90 €"
+  },
+  {
+    "manufacturer": "Tanqueray",
+    "bottle": "Gin Rangpur",
+    "size": "0,7 L",
+    "price": "23,49 €"
+  },
+  {
+    "manufacturer": "Beefeater",
+    "bottle": "London Distilled Dry Gin",
+    "size": "0,7 L",
+    "price": "17,55 €"
+  },
+  {
+    "manufacturer": "Beefeater",
+    "bottle": "London Distilled Dry Gin",
+    "size": "1 L",
+    "price": "20,90 €"
+  },
+  {
+    "manufacturer": "Beefeater",
+    "bottle": "24 London Dry Gin",
+    "size": "0,7 L",
+    "price": "23,90 €"
+  },
+  {
+    "manufacturer": "Bombay",
+    "bottle": "Sapphire London Dry Gin",
+    "size": "0,7 L",
+    "price": "18,90 €"
+  },
+  {
+    "manufacturer": "Bombay",
+    "bottle": "Sapphire London Dry Gin",
+    "size": "1 L",
+    "price": "24,50 €"
+  },
+  {
+    "manufacturer": "Bombay",
+    "bottle": "Sapphire East London Dry Gin",
+    "size": "0,7 L",
+    "price": "19,29 €"
+  },
+  {
+    "manufacturer": "Bombay",
+    "bottle": "Dry Gin",
+    "size": "0,7 L",
+    "price": "13,90 €"
+  },
+  {
+    "manufacturer": "Bombay",
+    "bottle": "London Dry Gin",
+    "size": "1 L",
+    "price": "21,90 €"
+  },
+  {
+    "manufacturer": "Gordons",
+    "bottle": "Special London Dry Gin",
+    "size": "0,7 L",
+    "price": "11,90 €"
+  },
+  {
+    "manufacturer": "Gordons",
+    "bottle": "Special London Dry Gin",
+    "size": "1 L",
+    "price": "15,90 €"
+  },
+  {
+    "manufacturer": "Finsbury",
+    "bottle": "London Dry Gin",
+    "size": "0,7 L",
+    "price": "9,50 €"
+  },
+  {
+    "manufacturer": "Finsbury",
+    "bottle": "Platinum London Dry Gin",
+    "size": "1 L",
+    "price": "17,50 €"
+  },
+  {
+    "manufacturer": "Gin Lane 1751",
+    "bottle": "London Dry Gin",
+    "size": "0,7 L",
+    "price": "20,90 €"
+  },
+  {
+    "manufacturer": "Gin Lane 1751",
+    "bottle": "Royal Strength Gin",
+    "size": "0,7 L",
+    "price": "22,50 €"
+  },
+  {
+    "manufacturer": "Elephant",
+    "bottle": "Gin",
+    "size": "0,5 L",
+    "price": "33,75 €"
+  },
+  {
+    "manufacturer": "Mombasa Club",
+    "bottle": "London Dry Gin",
+    "size": "0,7 L",
+    "price": "26,90 €"
+  },
+  {
+    "manufacturer": "Gunroom",
+    "bottle": "London Dry Gin",
+    "size": "0,5 L",
+    "price": "26,80 €"
+  },
+  {
+    "manufacturer": "Gin Raw",
+    "bottle": "Dry Gin",
+    "size": "0,7 L",
+    "price": "39,90 €"
+  }
+]

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>18,50 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>1 L</size>
+    <price>26,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Gin No.10</bottle>
+    <size>0,7 L</size>
+    <price>27,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Gin No.10</bottle>
+    <size>1 L</size>
+    <price>41,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>0.0 Alkoholfrei</bottle>
+    <size>0,7 L</size>
+    <price>19,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Flor de Sevilla Gin</bottle>
+    <size>1 L</size>
+    <price>32,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Flor de Sevilla Gin</bottle>
+    <size>0,7 L</size>
+    <price>24,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Blackcurrant Royale Distilled Gin</bottle>
+    <size>0,7 L</size>
+    <price>22,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Lovage London Dry Gin</bottle>
+    <size>1 L</size>
+    <price>45,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Gin No.10 Citrus Heart Edition</bottle>
+    <size>1 L</size>
+    <price>44,80 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Gin Rangpur</bottle>
+    <size>1 L</size>
+    <price>26,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Tanqueray</manufacturer>
+    <bottle>Gin Rangpur</bottle>
+    <size>0,7 L</size>
+    <price>23,49 €</price>
+  </row>
+  <row>
+    <manufacturer>Beefeater</manufacturer>
+    <bottle>London Distilled Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>17,55 €</price>
+  </row>
+  <row>
+    <manufacturer>Beefeater</manufacturer>
+    <bottle>London Distilled Dry Gin</bottle>
+    <size>1 L</size>
+    <price>20,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Beefeater</manufacturer>
+    <bottle>24 London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>23,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Bombay</manufacturer>
+    <bottle>Sapphire London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>18,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Bombay</manufacturer>
+    <bottle>Sapphire London Dry Gin</bottle>
+    <size>1 L</size>
+    <price>24,50 €</price>
+  </row>
+  <row>
+    <manufacturer>Bombay</manufacturer>
+    <bottle>Sapphire East London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>19,29 €</price>
+  </row>
+  <row>
+    <manufacturer>Bombay</manufacturer>
+    <bottle>Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>13,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Bombay</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>1 L</size>
+    <price>21,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Gordons</manufacturer>
+    <bottle>Special London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>11,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Gordons</manufacturer>
+    <bottle>Special London Dry Gin</bottle>
+    <size>1 L</size>
+    <price>15,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Finsbury</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>9,50 €</price>
+  </row>
+  <row>
+    <manufacturer>Finsbury</manufacturer>
+    <bottle>Platinum London Dry Gin</bottle>
+    <size>1 L</size>
+    <price>17,50 €</price>
+  </row>
+  <row>
+    <manufacturer>Gin Lane 1751</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>20,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Gin Lane 1751</manufacturer>
+    <bottle>Royal Strength Gin</bottle>
+    <size>0,7 L</size>
+    <price>22,50 €</price>
+  </row>
+  <row>
+    <manufacturer>Elephant</manufacturer>
+    <bottle>Gin</bottle>
+    <size>0,5 L</size>
+    <price>33,75 €</price>
+  </row>
+  <row>
+    <manufacturer>Mombasa Club</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>26,90 €</price>
+  </row>
+  <row>
+    <manufacturer>Gunroom</manufacturer>
+    <bottle>London Dry Gin</bottle>
+    <size>0,5 L</size>
+    <price>26,80 €</price>
+  </row>
+  <row>
+    <manufacturer>Gin Raw</manufacturer>
+    <bottle>Dry Gin</bottle>
+    <size>0,7 L</size>
+    <price>39,90 €</price>
+  </row>
+</root>
