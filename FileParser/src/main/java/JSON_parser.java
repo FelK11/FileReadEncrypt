@@ -46,14 +46,14 @@ public class JSON_parser{
         port = new Port();
     }
 
-    public Gin[] parseJSONFile(String path) {
+    public Object[] parseJSONFile(String path) {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
         File file = new File(path);
 
         try {
-            Gin[] gin = objectMapper.readValue(file, Gin[].class);
+            Object[] gin = objectMapper.readValue(file, Object[].class);
 
   /*          System.out.println("gin brand = " + gin[0].getManufacturer());
             System.out.println("gin price = " + gin[0].getPrice());*/
@@ -76,7 +76,7 @@ public class JSON_parser{
         }
 
         @Override
-        public Gin[] parseFile(String path) throws IOException {
+        public Object[] parseFile(String path) throws IOException {
             return parseJSONFile(path);
         }
     }

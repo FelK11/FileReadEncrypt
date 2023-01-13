@@ -43,14 +43,14 @@ public class CSV_parser{
         this.parserType = parserType;
     }
 
-    private Gin[] parseCSVFile(String path) throws IOException {
+    private Object[] parseCSVFile(String path) throws IOException {
 
         CsvMapper csvMapper = new CsvMapper();
 
         File file = new File(path);
 
         CsvSchema csvSchema = csvMapper
-                .typedSchemaFor(Gin.class)
+                .typedSchemaFor(Object.class)
                 .withHeader()
                 .withColumnSeparator(';')
                 .withComments();
@@ -58,7 +58,7 @@ public class CSV_parser{
 
 
         MappingIterator ginIter = csvMapper
-                .readerWithTypedSchemaFor(Gin.class)
+                .readerWithTypedSchemaFor(Object.class)
                 .with(csvSchema)
                 .readValues(file);
 
@@ -66,7 +66,7 @@ public class CSV_parser{
 
 
         List<Gin> ginList = ginIter.readAll();
-        Gin[] gins = ginList.toArray(new Gin[ginList.size()]);
+        Object[] gins = ginList.toArray(new Object[ginList.size()]);
 
 
         //System.out.println(gins[0].getPrice());
@@ -89,7 +89,7 @@ public class CSV_parser{
 
 
         @Override
-        public Gin[] parseFile(String path) throws IOException {
+        public Object[] parseFile(String path) throws IOException {
             return parseCSVFile(path);
         }
     }

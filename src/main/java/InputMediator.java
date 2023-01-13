@@ -8,6 +8,7 @@ public class InputMediator extends Subscriber{
 
     private FileLoader fileLoader;
     private FileType currentFileType;
+    private SortType currentSortType;
     private Object[] loadedData;
     protected ArrayList<Object> listOfLoadedData;
     private boolean parserExists;
@@ -18,6 +19,14 @@ public class InputMediator extends Subscriber{
 
     public void setCurrentFileType(FileType currentFileType) {
         this.currentFileType = currentFileType;
+    }
+
+    public SortType getCurrentSortType() {
+        return currentSortType;
+    }
+
+    public void setCurrentSortType(SortType currentSortType) {
+        this.currentSortType = currentSortType;
     }
 
     public ArrayList<Object> getListOfLoadedData() {
@@ -35,7 +44,7 @@ public class InputMediator extends Subscriber{
     private void build() {
         parserExists = false;
         fileLoader = new FileLoader();
-        listOfLoadedData = new ArrayList<>(1);
+        listOfLoadedData = new ArrayList<>();
     }
 
     private void parserLoadError(){
@@ -49,6 +58,36 @@ public class InputMediator extends Subscriber{
 
     @Subscribe
     public void receive(LoadFileEvent loadFileEvent) {
+
+        try {
+
+            for (Object fileParser : fileLoader.getFileParsers()) {
+
+                Method getParserType = fileParser.getClass().getDeclaredMethod("type");
+                String parserType = (String) getParserType.invoke(fileParser);
+
+                if (parserType.equals(getCurrentFileType().toString())) {
+                    parserExists = true;
+                    Method parseFile = fileParser.getClass().getDeclaredMethod("parseFile", String.class);
+                    Object[] parsedData = (Object[]) parseFile.invoke(fileParser, Configuration.INSTANCE.pathToGinData + "gin." + getCurrentFileType());
+                    loadedData = parsedData;
+                    Collections.addAll(listOfLoadedData, parsedData);
+                }
+            }
+
+            if (!parserExists){
+                parserLoadError();
+            }
+            parserExistCheckReset();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    @Subscribe
+    public void receive(SortDataEvent sortDataEvent) {
 
         try {
 

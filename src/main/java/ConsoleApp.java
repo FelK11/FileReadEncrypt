@@ -39,6 +39,7 @@ public class ConsoleApp {
             wrongCommand();
         }
 
+        //LoadEvent
         if (str.equals(validCommandManager.validCommandsWithoutMacro.get(0)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(1)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(2))) {
 
             if (str.equals(validCommandManager.validCommandsWithoutMacro.get(0))) {
@@ -57,6 +58,27 @@ public class ConsoleApp {
             }
 
         }
+
+        //SortEvent
+        if (str.equals(validCommandManager.validCommandsWithoutMacro.get(3)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(4)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(5))) {
+
+            if (str.equals(validCommandManager.validCommandsWithoutMacro.get(3))) {
+                inputMediator.setCurrentSortType(SortType.LAMBDA);
+            } else if (str.equals(validCommandManager.validCommandsWithoutMacro.get(4))){
+                inputMediator.setCurrentSortType(SortType.MERGE);
+            } else if (str.equals(validCommandManager.validCommandsWithoutMacro.get(5))){
+                inputMediator.setCurrentSortType(SortType.QUICK);
+            }
+
+            eventBus.post(new SortDataEvent());
+            /*loadList = inputMediator.getListOfLoadedData();
+
+            for (Object gin : loadList) {
+                System.out.println("Gin: " + ReflectionToStringBuilder.toString(gin));
+            }*/
+
+        }
+
     }
 
     private void wrongCommand() {

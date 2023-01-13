@@ -49,14 +49,14 @@ public class XML_parser{
     }
 
 
-    public Gin[] parseXMLFile(String path) {
+    public Object[] parseXMLFile(String path) {
 
         ObjectMapper xmlMapper = new XmlMapper();
 
         File file = new File(path);
 
         try {
-            Gin[] gin = xmlMapper.readValue(file, Gin[].class);
+            Object[] gin = xmlMapper.readValue(file, Object[].class);
 
 /*            System.out.println("gin brand = " + gin[0].getManufacturer());
             System.out.println("gin price = " + gin[0].getPrice());*/
@@ -79,7 +79,7 @@ public class XML_parser{
         }
 
         @Override
-        public Gin[] parseFile(String path) throws IOException {
+        public Object[] parseFile(String path) throws IOException {
             return parseXMLFile(path);
         }
     }
