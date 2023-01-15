@@ -1,52 +1,129 @@
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-
 public class ValidCommandManager {
 
 
-    int numberOfValidCommandsWithoutMacro = 12;
+    private final String loadCommandIdentifier = "load data";
+    private final String sortCommandIdentifier = "sort data using algorithm";
+    private final String encryptCommandIdentifier = "encrypt";
+    private final String decryptCommandIdentifier = "decrypt";
+    private final String QuitCommandIdentifier = "quit";
+    private final String startMacroIdentifier = "start macro";
+    private final String finishMacroIdentifier = "finish macro";
+    private final String executeMacroIdentifier = "execute macro";
 
-    String command1 = "load data gin." + FileType.values()[0].toString().toLowerCase();
-    String command2 = "load data gin." + FileType.values()[1].toString().toLowerCase();
-    String command3 = "load data gin." + FileType.values()[2].toString().toLowerCase();
 
-    String command4 = "sort data using algorithm " + SortAlgorithmType.values()[0].toString().toLowerCase();
-    String command5 = "sort data using algorithm " + SortAlgorithmType.values()[0].toString().toLowerCase();
-    String command6 = "sort data using algorithm " + SortAlgorithmType.values()[0].toString().toLowerCase();
+    public String getLoadCommandIdentifier() {
+        return loadCommandIdentifier;
+    }
 
-    String command7 = "encrypt gin." + FileType.values()[0].toString().toLowerCase();
-    String command8 = "encrypt gin." + FileType.values()[1].toString().toLowerCase();
-    String command9 = "encrypt gin." + FileType.values()[2].toString().toLowerCase();
+    public String getSortCommandIdentifier() {
+        return sortCommandIdentifier;
+    }
 
-    String command10 = "decrypt gin." + FileType.values()[0].toString().toLowerCase();
-    String command11 = "decrypt gin." + FileType.values()[1].toString().toLowerCase();
-    String command12 = "decrypt gin." + FileType.values()[2].toString().toLowerCase();
+    public String getEncryptCommandIdentifier() {
+        return encryptCommandIdentifier;
+    }
 
-    ArrayList<String> validCommandsWithoutMacro;
+    public String getDecryptCommandIdentifier() {
+        return decryptCommandIdentifier;
+    }
 
-    String macroCommand1 = "start macro ";
-    String macroCommand2 = "finish macro ";
-    String macroCommand3 = "execute macro ";
+    public String getQuitCommandIdentifier() {
+        return QuitCommandIdentifier;
+    }
+
+    public String getStartMacroIdentifier() {
+        return startMacroIdentifier;
+    }
+
+    public String getFinishMacroIdentifier() {
+        return finishMacroIdentifier;
+    }
+
+    public String getExecuteMacroIdentifier() {
+        return executeMacroIdentifier;
+    }
 
 
     public ValidCommandManager() {
 
-        validCommandsWithoutMacro = new ArrayList<>(numberOfValidCommandsWithoutMacro);
-        build();
-
     }
 
-    public void build(){
-        for (int i = 0; i < numberOfValidCommandsWithoutMacro; i++) {
+    public boolean validCommandCheck(String command) {
 
-            try {
-                Field field = ValidCommandManager.class.getDeclaredField(("command" + (i + 1)));
-                validCommandsWithoutMacro.add((String) field.get(this));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if ((command.startsWith(encryptCommandIdentifier) || command.startsWith(decryptCommandIdentifier) || command.startsWith(loadCommandIdentifier)) &&
+                ((command.endsWith("." + FileType.values()[0].toString().toLowerCase())) || command.endsWith("." + FileType.values()[1].toString().toLowerCase()) ||
+                        command.endsWith("." + FileType.values()[2].toString().toLowerCase()))) {
 
+            return true;
+
+        } else if (command.startsWith(sortCommandIdentifier) && ((command.endsWith(SortType.values()[0].toString().toLowerCase())) ||
+                command.endsWith(SortType.values()[1].toString().toLowerCase()) || command.endsWith(SortType.values()[2].toString().toLowerCase()))) {
+
+            return true;
+
+        } else if (command.equals(QuitCommandIdentifier)) {
+
+            return true;
+
+        } else return (command.startsWith(startMacroIdentifier) || command.startsWith(executeMacroIdentifier) || command.startsWith(finishMacroIdentifier)) &&
+                (command.endsWith(Configuration.INSTANCE.macroFileSuffix));
+    }
+
+    public void wrongCommand() {
+        System.out.println("Error invalid command! Try Again!");
+    }
+
+    public String extractFileNameFromString(String command) {
+
+        int beginningIndexOfFilename, endingIndexOfFilename;
+        String fileName;
+
+
+        if (command.startsWith(getLoadCommandIdentifier())) {
+
+            beginningIndexOfFilename = getLoadCommandIdentifier().length();
+            endingIndexOfFilename = command.lastIndexOf(".");
+            fileName = command.substring(beginningIndexOfFilename, endingIndexOfFilename);
+            fileName = fileName.trim();
+            return fileName;
+
+        } else if (command.startsWith(getEncryptCommandIdentifier()) || command.startsWith(getDecryptCommandIdentifier())) {
+
+            beginningIndexOfFilename = getEncryptCommandIdentifier().length();
+            endingIndexOfFilename = command.lastIndexOf(".");
+            fileName = command.substring(beginningIndexOfFilename, endingIndexOfFilename);
+            fileName = fileName.trim();
+            return fileName;
+
+        } else if (command.startsWith(getStartMacroIdentifier())) {
+
+            beginningIndexOfFilename = getStartMacroIdentifier().length();
+            endingIndexOfFilename = command.lastIndexOf(".");
+            fileName = command.substring(beginningIndexOfFilename, endingIndexOfFilename);
+            fileName = fileName.trim();
+            return fileName;
+
+        } else if (command.startsWith(getFinishMacroIdentifier())) {
+
+            beginningIndexOfFilename = getFinishMacroIdentifier().length();
+            endingIndexOfFilename = command.lastIndexOf(".");
+            fileName = command.substring(beginningIndexOfFilename, endingIndexOfFilename);
+            fileName = fileName.trim();
+            return fileName;
+
+        } else if (command.startsWith(getExecuteMacroIdentifier())) {
+
+            beginningIndexOfFilename = getExecuteMacroIdentifier().length();
+            endingIndexOfFilename = command.lastIndexOf(".");
+            fileName = command.substring(beginningIndexOfFilename, endingIndexOfFilename);
+            fileName = fileName.trim();
+            return fileName;
+
+        } else {
+            System.out.println("Error cant get filename");
+            System.exit(-33);
         }
+        return null;
     }
 
 }

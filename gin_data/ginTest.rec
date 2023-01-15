@@ -1,0 +1,4 @@
+load data gin.xml
+sort data using algorithm quick
+encrypt ginEncTest.json
+decrypt ginEncTest.json

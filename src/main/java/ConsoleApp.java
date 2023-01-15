@@ -1,6 +1,8 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.eventbus.EventBus;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,8 +10,8 @@ public class ConsoleApp {
 
     private final EventBus eventBus;
     private InputMediator inputMediator;
-    private ValidCommandManager validCommandManager;
-    ArrayList<Object> loadList;
+    //private ValidCommandManager validCommandManager;
+    private boolean stopApp;
 
     public ConsoleApp() {
         eventBus = new EventBus("Console App");
@@ -18,8 +20,8 @@ public class ConsoleApp {
 
     private void build() {
         inputMediator = new InputMediator();
-        validCommandManager = new ValidCommandManager();
-        loadList = new ArrayList<Object>();
+        //validCommandManager = new ValidCommandManager();
+        stopApp = false;
         addSubscriber(inputMediator);
     }
 
@@ -29,61 +31,162 @@ public class ConsoleApp {
 
     public void start() {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a string: ");
-        String str = scanner.nextLine();
+        while (!stopApp) {
 
-        System.out.println(validCommandManager.validCommandsWithoutMacro.get(1));
+            System.out.println("Enter a command: ");
+            String command = inputMediator.getScanner().nextLine();
 
-        if (!validCommandManager.validCommandsWithoutMacro.contains(str)) {
-            wrongCommand();
+            if (inputMediator.getValidCommandManager().validCommandCheck(command)) {
+
+                doCommand(command);
+
+            } else {
+                inputMediator.getValidCommandManager().wrongCommand();
+            }
+
+        }
+    }
+
+
+    private void doCommand(String command) {
+
+        //StopApp
+        if (command.equals(inputMediator.getValidCommandManager().getQuitCommandIdentifier())) {
+            stopApp = true;
         }
 
         //LoadEvent
-        if (str.equals(validCommandManager.validCommandsWithoutMacro.get(0)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(1)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(2))) {
+        if (command.startsWith(inputMediator.getValidCommandManager().getLoadCommandIdentifier())) {
 
-            if (str.equals(validCommandManager.validCommandsWithoutMacro.get(0))) {
+            if (command.endsWith(FileType.values()[0].toString().toLowerCase())) {
                 inputMediator.setCurrentFileType(FileType.JSON);
-            } else if (str.equals(validCommandManager.validCommandsWithoutMacro.get(1))){
+            } else if (command.endsWith(FileType.values()[1].toString().toLowerCase())) {
                 inputMediator.setCurrentFileType(FileType.CSV);
-            } else if (str.equals(validCommandManager.validCommandsWithoutMacro.get(2))){
+            } else if (command.endsWith(FileType.values()[2].toString().toLowerCase())) {
                 inputMediator.setCurrentFileType(FileType.XML);
             }
 
+            inputMediator.setCurrentFileName(inputMediator.getValidCommandManager().extractFileNameFromString(command));
+
             eventBus.post(new LoadFileEvent());
-            loadList = inputMediator.getListOfLoadedData();
 
-            for (Object gin : loadList) {
-                System.out.println("Gin: " + ReflectionToStringBuilder.toString(gin));
+            System.out.println("Loaded Data from " + inputMediator.getCurrentFileName() + inputMediator.getCurrentFileType().toString().toLowerCase() + ": ");
+            for (Object gin : inputMediator.getCurrentLoadedData()) {
+                try {
+                    System.out.println("Gin: " + inputMediator.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(gin));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
             }
-
+            System.out.println("---------------------------------------------------");
         }
 
         //SortEvent
-        if (str.equals(validCommandManager.validCommandsWithoutMacro.get(3)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(4)) || str.equals(validCommandManager.validCommandsWithoutMacro.get(5))) {
+        if (command.startsWith(inputMediator.getValidCommandManager().getSortCommandIdentifier())) {
 
-            if (str.equals(validCommandManager.validCommandsWithoutMacro.get(3))) {
+            if (command.endsWith(SortType.LAMBDA.toString().toLowerCase())) {
                 inputMediator.setCurrentSortType(SortType.LAMBDA);
-            } else if (str.equals(validCommandManager.validCommandsWithoutMacro.get(4))){
+            } else if (command.endsWith(SortType.MERGE.toString().toLowerCase())) {
                 inputMediator.setCurrentSortType(SortType.MERGE);
-            } else if (str.equals(validCommandManager.validCommandsWithoutMacro.get(5))){
+            } else if (command.endsWith(SortType.QUICK.toString().toLowerCase())) {
                 inputMediator.setCurrentSortType(SortType.QUICK);
             }
 
             eventBus.post(new SortDataEvent());
-            /*loadList = inputMediator.getListOfLoadedData();
 
-            for (Object gin : loadList) {
-                System.out.println("Gin: " + ReflectionToStringBuilder.toString(gin));
-            }*/
+            System.out.println("Sorted Data with " + inputMediator.getCurrentSortType().toString().toLowerCase() + "sort: ");
+            for (Object gin : inputMediator.getCurrentLoadedData()) {
+                try {
+                    System.out.println("Gin: " + inputMediator.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(gin));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("---------------------------------------------------");
+        }
+
+
+        //EncryptEvent
+        if (command.startsWith(inputMediator.getValidCommandManager().getEncryptCommandIdentifier())) {
+
+            if (command.endsWith(FileType.values()[0].toString().toLowerCase())) {
+                inputMediator.setCurrentFileType(FileType.JSON);
+            } else if (command.endsWith(FileType.values()[1].toString().toLowerCase())) {
+                inputMediator.setCurrentFileType(FileType.CSV);
+            } else if (command.endsWith(FileType.values()[2].toString().toLowerCase())) {
+                inputMediator.setCurrentFileType(FileType.XML);
+            }
+
+            inputMediator.setCurrentFileName(inputMediator.getValidCommandManager().extractFileNameFromString(command));
+
+            eventBus.post(new EncryptDataEvent());
+
+            System.out.println("Encrypted data to:");
+            System.out.println(inputMediator.getCurrentFileName() + inputMediator.getCurrentFileType());
+            System.out.println("---------------------------------------------------");
+
+        }
+
+        //DecryptEvent
+        if (command.startsWith(inputMediator.getValidCommandManager().getDecryptCommandIdentifier())) {
+
+            if (command.endsWith(FileType.values()[0].toString().toLowerCase())) {
+                inputMediator.setCurrentFileType(FileType.JSON);
+            } else if (command.endsWith(FileType.values()[1].toString().toLowerCase())) {
+                inputMediator.setCurrentFileType(FileType.CSV);
+            } else if (command.endsWith(FileType.values()[2].toString().toLowerCase())) {
+                inputMediator.setCurrentFileType(FileType.XML);
+            }
+
+            inputMediator.setCurrentFileName(inputMediator.getValidCommandManager().extractFileNameFromString(command));
+
+            eventBus.post(new DecryptDataEvent());
+            eventBus.post(new LoadFileEvent());
+
+            System.out.println("Loaded decrypted Data from " + inputMediator.getCurrentFileName() + inputMediator.getCurrentFileType().toString().toLowerCase() + ": ");
+            for (Object gin : inputMediator.getCurrentLoadedData()) {
+                try {
+                    System.out.println("Gin: " + inputMediator.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(gin));
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("---------------------------------------------------");
+
+        }
+
+        //StartMacroEvent
+        if (command.startsWith(inputMediator.getValidCommandManager().getStartMacroIdentifier())) {
+
+            inputMediator.setCurrentFileName(inputMediator.getValidCommandManager().extractFileNameFromString(command));
+
+            eventBus.post(new StartMacroEvent());
+        }
+
+        //ExecuteMacroEvent
+        if (command.startsWith(inputMediator.getValidCommandManager().getExecuteMacroIdentifier())) {
+
+            inputMediator.setCurrentFileName(inputMediator.getValidCommandManager().extractFileNameFromString(command));
+
+            Scanner executeMacroScanner = null;
+            try {
+                executeMacroScanner = new Scanner(new File(Configuration.INSTANCE.pathToGinData + inputMediator.getCurrentFileName() + Configuration.INSTANCE.macroFileSuffix));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            while (executeMacroScanner.hasNextLine()) {
+                String currentCommand = executeMacroScanner.nextLine();
+                if (inputMediator.getValidCommandManager().validCommandCheck(currentCommand)) {
+                    doCommand(currentCommand);
+                } else {
+                    System.out.println("Error! Invalid Macro");
+                    break;
+                }
+            }
 
         }
 
     }
 
-    private void wrongCommand() {
-        System.out.println("Error invalid command");
-        System.exit(-42);
-    }
 }
 

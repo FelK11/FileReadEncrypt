@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -11,49 +13,54 @@ public class SortLoader {
     private final ArrayList<Object> sorterPorts;
 
     public SortLoader() {
+
+
         sorterPorts = new ArrayList<>(FileType.values().length);
         build();
     }
 
-    public ArrayList<Object> getFileParsers() {
+    public ArrayList<Object> getSorters() {
         return sorterPorts;
     }
 
     public void build() {
 
-        //verify Jar
+
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\Felix\\.jdks\\openjdk-17.0.2\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToFileParserJavaArchive + "fileparser-1.0.jar");
-            Process process = processBuilder.start();
-            process.waitFor();
 
-            InputStream inputStream = process.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line;
-            boolean isComponentAccepted = false;
+            for (int i = 0; i < (SortType.values().length); i++) {
 
-            while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
-                if (line.contains("verified")) {
-                    isComponentAccepted = true;
+                //verify Jar
+                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\Felix\\.jdks\\openjdk-17.0.2\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + SortType.values()[i] + Configuration.INSTANCE.sorterComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + SortType.values()[i] + Configuration.INSTANCE.sorterJarName);
+                Process process = processBuilder.start();
+                process.waitFor();
+
+                InputStream inputStream = process.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line;
+                boolean isComponentAccepted = false;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+                    if (line.contains("verified")) {
+                        isComponentAccepted = true;
+                    }
                 }
-            }
 
-            if (isComponentAccepted) {
-                System.out.println("component accepted");
-            } else {
-                System.out.println("component rejected");
-            }
-
+                if (isComponentAccepted) {
+                    System.out.println("component accepted");
+                } else {
+                    System.out.println("component rejected");
+                }
 
 
-            // parsers
-            for (int i = 0; i < SortType.values().length; i++) {
-                URL[] urls = {new File(Configuration.INSTANCE.pathToGenericSorterComponent + SortType.values()[i] +"SorterComponent" + Configuration.INSTANCE.pathToMergeSorterComponentJavaArchive + SortType.values()[i] +"SorterComponent-1.0.jar").toURI().toURL()};
+                // parsers
+
+                URL[] urls = {new File(Configuration.INSTANCE.pathToGenericComponentDirectory + SortType.values()[i] + Configuration.INSTANCE.sorterComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + SortType.values()[i] + Configuration.INSTANCE.sorterJarName).toURI().toURL()};
                 URLClassLoader urlClassLoader = new URLClassLoader(urls, SortLoader.class.getClassLoader());
 
-                Class<?> sorterClass = Class.forName(SortType.values()[i] + "Sorter", true, urlClassLoader);
+                Class<?> sorterClass = Class.forName(StringUtils.capitalize(SortType.values()[i].toString().toLowerCase()) + "Sorter", true, urlClassLoader);
                 Object sorterInstance = sorterClass.getMethod("getInstance").invoke(null);
 
                 Object sorterPort = sorterClass.getDeclaredField("port").get(sorterInstance);
