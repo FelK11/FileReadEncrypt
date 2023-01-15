@@ -3,14 +3,12 @@ import com.google.common.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleApp {
 
     private final EventBus eventBus;
     private InputMediator inputMediator;
-    //private ValidCommandManager validCommandManager;
     private boolean stopApp;
 
     public ConsoleApp() {
@@ -20,7 +18,6 @@ public class ConsoleApp {
 
     private void build() {
         inputMediator = new InputMediator();
-        //validCommandManager = new ValidCommandManager();
         stopApp = false;
         addSubscriber(inputMediator);
     }
@@ -168,12 +165,14 @@ public class ConsoleApp {
 
             inputMediator.setCurrentFileName(inputMediator.getValidCommandManager().extractFileNameFromString(command));
 
+            //Load Macro
             Scanner executeMacroScanner = null;
             try {
                 executeMacroScanner = new Scanner(new File(Configuration.INSTANCE.pathToGinData + inputMediator.getCurrentFileName() + Configuration.INSTANCE.macroFileSuffix));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            //ExecuteMacro
             while (executeMacroScanner.hasNextLine()) {
                 String currentCommand = executeMacroScanner.nextLine();
                 if (inputMediator.getValidCommandManager().validCommandCheck(currentCommand)) {

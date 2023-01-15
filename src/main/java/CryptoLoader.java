@@ -54,7 +54,7 @@ public class CryptoLoader {
                 }
 
 
-                // parsers
+                // load crypto
 
                 URL[] urls = {new File(Configuration.INSTANCE.pathToGenericComponentDirectory + Configuration.INSTANCE.cryptoComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + Configuration.INSTANCE.cryptoJarName).toURI().toURL()};
                 URLClassLoader urlClassLoader = new URLClassLoader(urls, SortLoader.class.getClassLoader());

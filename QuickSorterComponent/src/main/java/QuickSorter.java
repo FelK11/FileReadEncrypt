@@ -43,8 +43,8 @@ public class QuickSorter {
         port = new Port();
     }
 
-    /**
-     * Sort the first size entries in a.
+    /*
+      Sort the first size entries in a.
      */
     public Object[] sort(Object[] a, int size, Comparator c) {
         quicksort(a, 0, size - 1, c);
@@ -58,8 +58,8 @@ public class QuickSorter {
         a[right] = t;
     }
 
-    /**
-     * Sort the entries in a between left and right inclusive.
+    /*
+     Sort the entries in a between left and right inclusive.
      */
     public void quicksort(Object[] a, int left, int right, Comparator c) {
         int size = right - left + 1;

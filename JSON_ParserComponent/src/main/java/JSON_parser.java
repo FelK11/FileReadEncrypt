@@ -3,7 +3,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 
-public class JSON_parser{
+public class JSON_parser {
 
     private static final JSON_parser instance = new JSON_parser();
     private String version = "1.0";
@@ -54,9 +54,6 @@ public class JSON_parser{
 
         try {
             Object[] gin = objectMapper.readValue(file, Object[].class);
-
-  /*          System.out.println("gin brand = " + gin[0].getManufacturer());
-            System.out.println("gin price = " + gin[0].getPrice());*/
             return gin;
         } catch (IOException e) {
             e.printStackTrace();

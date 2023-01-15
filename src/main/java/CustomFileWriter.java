@@ -50,10 +50,12 @@ public class CustomFileWriter {
         CsvSchema.Builder csvBuilder = new CsvSchema.Builder(csvSchema);
         ArrayList<String> columnNameList = new ArrayList<>();
 
+        //get column names from objects
         for (Object columnName : ((LinkedHashMap) data[0]).keySet().toArray()) {
             columnNameList.add((String) columnName);
         }
 
+        //get column data from objects
         for (int i = 0; i < ((LinkedHashMap) data[0]).keySet().toArray().length; i++) {
             csvBuilder.addColumn((String) ((LinkedHashMap) data[0]).keySet().toArray()[i]);
         }

@@ -55,7 +55,7 @@ public class SortLoader {
                 }
 
 
-                // parsers
+                // sorters
 
                 URL[] urls = {new File(Configuration.INSTANCE.pathToGenericComponentDirectory + SortType.values()[i] + Configuration.INSTANCE.sorterComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + SortType.values()[i] + Configuration.INSTANCE.sorterJarName).toURI().toURL()};
                 URLClassLoader urlClassLoader = new URLClassLoader(urls, SortLoader.class.getClassLoader());

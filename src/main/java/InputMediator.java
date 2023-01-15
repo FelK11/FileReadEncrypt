@@ -255,6 +255,7 @@ public class InputMediator extends Subscriber {
                         e.printStackTrace();
                     }
 
+                    //write commands to file
                     for (String macroCommand : commandList) {
                         try {
                             macroWriter.append(macroCommand);
@@ -269,7 +270,7 @@ public class InputMediator extends Subscriber {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
+                    //add macro to macro list
                 } else {
                     firstCommand = true;
                     commandList.add(nextCommand);
