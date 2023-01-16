@@ -27,7 +27,8 @@ public class FileLoader {
             for (int i = 0; i < FileType.values().length; i++) {
 
                 //verify Jar
-                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\Felix\\.jdks\\openjdk-17.0.2\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + FileType.values()[i] + Configuration.INSTANCE.parserComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + FileType.values()[i] + Configuration.INSTANCE.parserJarName);
+                //ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\fklinge\\.jdks\\openjdk-17.0.1\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + FileType.values()[i] + Configuration.INSTANCE.parserComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + FileType.values()[i] + Configuration.INSTANCE.parserJarName);
+                ProcessBuilder processBuilder = new ProcessBuilder(Configuration.INSTANCE.pathToJarsignerDirectory , "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + FileType.values()[i] + Configuration.INSTANCE.parserComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + FileType.values()[i] + Configuration.INSTANCE.parserJarName);
                 Process process = processBuilder.start();
                 process.waitFor();
 

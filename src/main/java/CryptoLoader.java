@@ -1,5 +1,3 @@
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
@@ -30,7 +28,7 @@ public class CryptoLoader {
 
                 //verify Jar
 
-                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\Felix\\.jdks\\openjdk-17.0.2\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + Configuration.INSTANCE.cryptoComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + Configuration.INSTANCE.cryptoJarName);
+                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\fklinge\\.jdks\\openjdk-17.0.1\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + Configuration.INSTANCE.cryptoComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + Configuration.INSTANCE.cryptoJarName);
                 Process process = processBuilder.start();
                 process.waitFor();
 

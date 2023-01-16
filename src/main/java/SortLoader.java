@@ -31,7 +31,7 @@ public class SortLoader {
             for (int i = 0; i < (SortType.values().length); i++) {
 
                 //verify Jar
-                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\Felix\\.jdks\\openjdk-17.0.2\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + SortType.values()[i] + Configuration.INSTANCE.sorterComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + SortType.values()[i] + Configuration.INSTANCE.sorterJarName);
+                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\fklinge\\.jdks\\openjdk-17.0.1\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + SortType.values()[i] + Configuration.INSTANCE.sorterComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + SortType.values()[i] + Configuration.INSTANCE.sorterJarName);
                 Process process = processBuilder.start();
                 process.waitFor();
 
