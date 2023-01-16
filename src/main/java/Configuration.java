@@ -2,10 +2,14 @@ public enum Configuration {
 
     INSTANCE;
 
+
+
     public final String userDirectory = System.getProperty("user.dir");
     public final String homeDirectory = System.getProperty("user.home");
     public final String fileSeparator = System.getProperty("file.separator");
+
     public final String pathToJarsignerDirectory = homeDirectory + "\\.jdks\\openjdk-17.0.2\\bin\\jarsigner\\";
+
     public final String pathToGenericComponentDirectory = userDirectory + fileSeparator;
     public final String pathToGenericComponentJavaArchive = fileSeparator + "jar" + fileSeparator;
     public final String pathToGinData = userDirectory + fileSeparator + "gin_data" + fileSeparator;
