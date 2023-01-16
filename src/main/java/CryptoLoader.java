@@ -28,7 +28,7 @@ public class CryptoLoader {
 
                 //verify Jar
 
-                ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\fklinge\\.jdks\\openjdk-17.0.1\\bin\\jarsigner", "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + Configuration.INSTANCE.cryptoComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + Configuration.INSTANCE.cryptoJarName);
+                ProcessBuilder processBuilder = new ProcessBuilder(Configuration.INSTANCE.pathToJarsignerDirectory, "-verify", Configuration.INSTANCE.pathToGenericComponentDirectory + Configuration.INSTANCE.cryptoComponentFolderName + Configuration.INSTANCE.pathToGenericComponentJavaArchive + Configuration.INSTANCE.cryptoJarName);
                 Process process = processBuilder.start();
                 process.waitFor();
 
