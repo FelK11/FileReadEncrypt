@@ -20,6 +20,7 @@ public class InputMediator extends Subscriber {
     private FileType currentFileType;
     private SortType currentSortType;
     private String currentFileName;
+    private String[] currentSortFieldNames;
     private Object[] currentLoadedData;
     private Comparator dataComparator;
     private boolean componentExists;
@@ -77,6 +78,10 @@ public class InputMediator extends Subscriber {
         this.currentFileName = currentFileName;
     }
 
+    public String[] getCurrentSortFieldNames() {
+        return currentSortFieldNames;
+    }
+
     public Object[] getCurrentLoadedData() {
         return currentLoadedData;
     }
@@ -107,11 +112,21 @@ public class InputMediator extends Subscriber {
         componentExists = false;
     }
 
-    private void generateDataComparatorForFirstKey() {
+    private void generateDataComparatorForFirstKey(int fieldNumberToSortAfter) {
 
-        String fieldToSortDataAfter = (String) ((LinkedHashMap) currentLoadedData[0]).keySet().toArray()[0];
+        String fieldName = (String) ((LinkedHashMap) currentLoadedData[0]).keySet().toArray()[fieldNumberToSortAfter];
         // Generate Comparator
-        dataComparator = Comparator.comparing((LinkedHashMap<String, String> entry) -> entry.get(fieldToSortDataAfter));
+        dataComparator = Comparator.comparing((LinkedHashMap<String, String> entry) -> entry.get(fieldName));
+
+    }
+
+    private void generateFieldNamesForComparator() {
+
+        currentSortFieldNames = new String[((LinkedHashMap) currentLoadedData[0]).keySet().toArray().length];
+        for (int i = 0; i < ((LinkedHashMap) currentLoadedData[0]).keySet().toArray().length; i++) {
+            currentSortFieldNames[i] = (String) ((LinkedHashMap) currentLoadedData[0]).keySet().toArray()[i];
+
+        }
 
     }
 
@@ -156,7 +171,36 @@ public class InputMediator extends Subscriber {
     @Subscribe
     public void receive(SortDataEvent sortDataEvent) {
 
-        generateDataComparatorForFirstKey();
+        generateFieldNamesForComparator();
+        boolean validFieldNumber = false;
+
+        while (!validFieldNumber) {
+
+            int fieldNumber = 0;
+            System.out.println("Choose field number to sort data after:");
+            for (int i = 0; i < currentSortFieldNames.length; i++) {
+
+                System.out.print((i + 1) + " - " + currentSortFieldNames[i] + "; ");
+
+            }
+            System.out.println();
+
+            String fieldNumberString = getScanner().nextLine();
+            try {
+                fieldNumber = Integer.parseInt(fieldNumberString);
+            } catch (NumberFormatException ne){
+                System.out.println("Error input valid Number!");
+            }
+
+            if (fieldNumber != 0 && fieldNumber <= currentSortFieldNames.length){
+                generateDataComparatorForFirstKey(fieldNumber - 1);
+                validFieldNumber = true;
+            } else {
+                System.out.println("Error! Enter field number accordingly to sort field!");
+            }
+
+        }
+
 
         try {
 
